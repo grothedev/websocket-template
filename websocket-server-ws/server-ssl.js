@@ -23,34 +23,51 @@ if (process.env.NOSSL || process.env.PRIVKEY_PATH == null || process.env.FULLCHA
     server = require('https').createServer(serverOptions, app);
 }
 
+
+//app-related data here (business logic)
+let clients = {}; // ip address => socket
+let cursors = {}; // id => [x,y]  cursor position
+
 // Create WebSocket server with SSL
 const wss = new WebSocket.Server({ server });
-
 // Handle WebSocket connections
 wss.on('connection', (ws, req) => {
-    console.log('New connection from:', req.connection.remoteAddress);
+    console.log('New connection from:', req.socket.remoteAddress);
+    clients[req.socket.remoteAddress] = ws;
+    cursors[ws] = [0, 0]; // Initialize cursor position for the new client
+    ws.emit('init', { cursors });
     
-    // Send welcome message
-    ws.send('Welcome to WebSocket server!');
-    
-    // Handle incoming messages
+
     ws.on('message', (message) => {
         console.log('Received:', message.toString());
         
-        // Echo message back to client
-        ws.send(`Echo: ${message}`);
-        
-        // Broadcast to all connected clients
-        wss.clients.forEach((client) => {
-            if (client !== ws && client.readyState === WebSocket.OPEN) {
-                client.send(`Broadcast: ${message}`);
+        //TODO implement the thing from the other thing here
+        //expect that the message is a JSON object, with "action" being the type of action, IOW the client's intent, and "data" being the payload of the action
+        try {
+            const parsedMessage = JSON.parse(message);
+            console.log('Parsed message:', parsedMessage);
+            switch (parsedMessage.action) {
+                case 'echo':
+                    ws.send(`Echo: ${parsedMessage.data}`);
+                    break;
+                case 'update_pos':
+                    console.log('update pos')
+                    break;
+                default:
+                    break;
             }
-        });
+        } catch (error) {
+            console.error('Error parsing message:', error);
+            ws.send('Error: Invalid message format');
+            return;
+        }
     });
     
     // Handle connection close
     ws.on('close', () => {
         console.log('WebSocket connection closed');
+        delete clients[req.socket.remoteAddress];
+        delete cursors[ws];
     });
     
     // Handle errors
@@ -65,6 +82,14 @@ server.listen(PORT, () => {
     console.log(`WebSocket server running on wss://localhost:${PORT}`);
 });
 
+const intervalId = setInterval(() => {
+    // Broadcast cursor positions to all connected clients
+    wss.clients.forEach((client) => {
+        if (client.readyState === WebSocket.OPEN) {
+            client.send(JSON.stringify({ action: 'sync_data', data: cursors }));
+        }
+    });
+}, 1000);
 // To generate self-signed certificates for development:
 // mkdir ssl
 // openssl req -x509 -newkey rsa:4096 -keyout ssl/server.key -out ssl/server.cert -days 365 -nodes
