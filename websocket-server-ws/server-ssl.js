@@ -44,7 +44,7 @@ wss.on('connection', (ws, req) => {
     ws.clientId = clientId; // Attach the ID to the ws object for easy lookup
 
     // Send the new client its ID and the current state
-    ws.send(JSON.stringify({ action: 'init', data: { id: clientId, cursors } }));
+    ws.send(JSON.stringify({ action: 'init', data: cursors }));
 
     ws.on('message', (message) => {
         console.log('Received:', message.toString());
