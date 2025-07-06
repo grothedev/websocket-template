@@ -1,3 +1,5 @@
+require('dotenv').config();
+const crypto = require('crypto');
 const WebSocket = require('ws');
 const express = require('express');
 const fs = require('fs');
@@ -24,50 +26,62 @@ if (process.env.NOSSL || process.env.PRIVKEY_PATH == null || process.env.FULLCHA
 }
 
 
+//TODO separate app logic from websocket logic
 //app-related data here (business logic)
-let clients = {}; // ip address => socket
-let cursors = {}; // id => [x,y]  cursor position
+let clients = {}; // clientId => socket
+let cursors = {}; // clientId => { pos: [x,y], nick: '' }
 
 // Create WebSocket server with SSL
 const wss = new WebSocket.Server({ server });
 // Handle WebSocket connections
 wss.on('connection', (ws, req) => {
-    console.log('New connection from:', req.socket.remoteAddress);
-    clients[req.socket.remoteAddress] = ws;
-    cursors[ws] = [0, 0]; // Initialize cursor position for the new client
-    ws.emit('init', { cursors });
-    
+    const clientId = crypto.randomUUID();
+    console.log(`New connection from: ${req.socket.remoteAddress}, assigned ID: ${clientId}`);
+
+    // Store client by its unique ID
+    clients[clientId] = ws;
+    cursors[clientId] = { pos: [0, 0], nick: '' }; // Initialize cursor position
+    ws.clientId = clientId; // Attach the ID to the ws object for easy lookup
+
+    // Send the new client its ID and the current state
+    ws.send(JSON.stringify({ action: 'init', data: { id: clientId, cursors } }));
 
     ws.on('message', (message) => {
         console.log('Received:', message.toString());
-        
-        //TODO implement the thing from the other thing here
-        //expect that the message is a JSON object, with "action" being the type of action, IOW the client's intent, and "data" being the payload of the action
+
         try {
-            const parsedMessage = JSON.parse(message);
-            console.log('Parsed message:', parsedMessage);
-            switch (parsedMessage.action) {
+            // FIX 1: Parse the message directly, not message.data
+            const m = JSON.parse(message);
+            console.log('Parsed message:', m);
+            switch (m.action) {
                 case 'echo':
-                    ws.send(`Echo: ${parsedMessage.data}`);
+                    ws.send(`Echo: ${m.data}`);
                     break;
                 case 'update_pos':
-                    console.log('update pos')
+                    // FIX 2: Use the client's unique ID to update the cursor
+                    if (cursors[ws.clientId]) {
+                        cursors[ws.clientId] = {
+                            pos: m.data.pos,
+                            nick: m.data.nick
+                        };
+                    }
                     break;
                 default:
                     break;
             }
         } catch (error) {
             console.error('Error parsing message:', error);
-            ws.send('Error: Invalid message format');
+            ws.send(JSON.stringify({ action: 'error', data: 'Invalid message format' }));
             return;
         }
     });
     
     // Handle connection close
     ws.on('close', () => {
-        console.log('WebSocket connection closed');
-        delete clients[req.socket.remoteAddress];
-        delete cursors[ws];
+        console.log(`WebSocket connection closed for ID: ${ws.clientId}`);
+        // Clean up using the client's unique ID
+        delete clients[ws.clientId];
+        delete cursors[ws.clientId];
     });
     
     // Handle errors
@@ -77,7 +91,7 @@ wss.on('connection', (ws, req) => {
 });
 
 // Start secure server
-const PORT = 8443;
+const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => {
     console.log(`WebSocket server running on wss://localhost:${PORT}`);
 });
