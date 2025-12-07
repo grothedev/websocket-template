@@ -1,0 +1,23 @@
+{
+  "name": "websocket-benchmarks",
+  "version": "1.0.0",
+  "description": "Performance benchmarks for WebSocket implementations",
+  "main": "run-all.js",
+  "scripts": {
+    "test": "node run-all.js",
+    "test:ws": "node test-ws.js",
+    "test:socketio": "node test-socketio.js",
+    "compare": "node compare.js"
+  },
+  "keywords": [
+    "websocket",
+    "benchmark",
+    "performance"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "socket.io-client": "^4.5.0",
+    "ws": "^8.13.0"
+  }
+}

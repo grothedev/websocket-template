@@ -1,4 +1,3 @@
-require('dotenv').config();
 const crypto = require('crypto');
 const WebSocket = require('ws');
 const express = require('express');
