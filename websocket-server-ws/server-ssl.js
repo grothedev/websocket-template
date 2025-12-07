@@ -110,6 +110,7 @@ function send(skt, action, payload) {
     if (skt && skt.readyState === WebSocket.OPEN) {
         try {
             skt.send(JSON.stringify({ action: action, data: payload }));
+            //TODO analyze performance of string vs blob vs bin
         } catch (e) {
             console.error('Error sending message:', e);
         }
