@@ -1,0 +1,116 @@
+#root {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  text-align: center;
+  color: #888;
+  margin-bottom: 2rem;
+}
+
+.todo-list-container {
+  background: #1a1a1a;
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+
+.connection-status {
+  text-align: center;
+  padding: 0.5rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  font-size: 0.875rem;
+}
+
+.connection-status.connected {
+  background: #1a3d1a;
+  color: #4ade80;
+}
+
+.connection-status.disconnected {
+  background: #3d1a1a;
+  color: #f87171;
+}
+
+.todo-form {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.todo-input {
+  flex: 1;
+  padding: 0.75rem;
+  border: 1px solid #333;
+  border-radius: 4px;
+  background: #0a0a0a;
+  color: #fff;
+  font-size: 1rem;
+}
+
+.todo-input:focus {
+  outline: none;
+  border-color: #646cff;
+}
+
+.todo-form button {
+  padding: 0.75rem 1.5rem;
+}
+
+.todo-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border-bottom: 1px solid #333;
+}
+
+.todo-item:last-child {
+  border-bottom: none;
+}
+
+.todo-item input[type="checkbox"] {
+  width: 1.25rem;
+  height: 1.25rem;
+  cursor: pointer;
+}
+
+.todo-item span {
+  flex: 1;
+}
+
+.todo-item span.completed {
+  text-decoration: line-through;
+  color: #666;
+}
+
+.remove-btn {
+  padding: 0.25rem 0.75rem;
+  font-size: 0.875rem;
+  background: #dc2626;
+  border-color: #dc2626;
+}
+
+.remove-btn:hover {
+  background: #b91c1c;
+  border-color: #b91c1c;
+}
+
+.empty-message {
+  text-align: center;
+  color: #666;
+  padding: 1rem;
+}
