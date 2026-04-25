@@ -1,20 +1,18 @@
 {
-  "name": "belthelziquor websocket app",
+  "name": "websocket-server-socketio",
   "version": "1.0.0",
-  "description": "",
+  "description": "WebSocket server using socket.io",
   "main": "server.js",
   "scripts": {
-    "test": "node test.js",
-    "run": "node"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "author": "thomas grothe",
   "license": "MIT",
   "dependencies": {
+    "cors": "latest",
     "dotenv": "^16.4.5",
-    "socket.io": "latest",
-    "ws": "^8.18.0",
     "express": "^4.19.2",
-    "body-parser": "^1.20.2",
-    "cors": "latest"
+    "socket.io": "latest"
   }
 }
