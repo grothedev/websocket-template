@@ -5,10 +5,10 @@
   "license": "ISC",
   "author": "",
   "type": "commonjs",
-  "main": "server.js",
+  "main": "server-ssl.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server-ssl.js"
   },
   "dependencies": {
     "express": "^5.1.0",

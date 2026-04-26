@@ -68,7 +68,7 @@ var addresses = {}; // id => ip address
 io.on('connection', function(skt) {
     console.log(`client connected: ${skt.id}`);
     clients[skt.id] = skt;
-    cursors[skt.id] = [0, 0];
+    cursors[skt.id] = { pos: [0, 0], nick: '' };
     addresses[skt.id] = skt.handshake.headers['x-forwarded-for'] || skt.handshake.address; 
     skt.emit('init', skt.id); //send client its id and all other cursors
 
