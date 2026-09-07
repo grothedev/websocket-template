@@ -20,12 +20,6 @@ $(document).ready(async function() {
 });
 
 async function getServerEnvVars(){
-    /*await axios.get('/env').then((res)=>{
-        env = res.data;
-        log(env);
-    }).catch((err)=>{
-        log(err);
-    });*/
 }
 
 //initial setup such as hiding/showing certain things
