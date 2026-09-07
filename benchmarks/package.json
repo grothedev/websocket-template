@@ -2,17 +2,26 @@
   "name": "websocket-benchmarks",
   "version": "1.0.0",
   "description": "Performance benchmarks for WebSocket implementations",
+  "type": "module",
   "main": "run-all.js",
   "scripts": {
     "test": "node run-all.js",
     "test:ws": "node test-ws.js",
     "test:socketio": "node test-socketio.js",
-    "compare": "node compare.js"
+    "compare": "node compare.js",
+    "test:runtimes": "node run-runtime-comparison.mjs",
+    "test:runtime:node": "node test-ws.mjs",
+    "test:runtime:deno": "deno run --allow-net --allow-env --allow-write --allow-read test-ws.mjs",
+    "test:runtime:bun": "bun run test-ws.mjs",
+    "compare:runtimes": "node compare-runtimes.mjs"
   },
   "keywords": [
     "websocket",
     "benchmark",
-    "performance"
+    "performance",
+    "nodejs",
+    "deno",
+    "bun"
   ],
   "author": "thou",
   "license": "MIT",

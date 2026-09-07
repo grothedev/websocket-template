@@ -1,0 +1,150 @@
+{
+  "timestamp": "2026-01-12T04:52:37.766Z",
+  "runtimes": [
+    "node",
+    "deno",
+    "bun"
+  ],
+  "results": {
+    "node": {
+      "implementation": "Native WebSocket (ws)",
+      "runtime": "node",
+      "serverUrl": "ws://localhost:8090",
+      "config": {
+        "connections": 100,
+        "messagesPerConnection": 1000,
+        "messageSize": 100
+      },
+      "connectionTime": [],
+      "latencies": [],
+      "errors": 111,
+      "memoryBefore": 7.314933776855469,
+      "memoryAfter": 8.289161682128906,
+      "startTime": 2055.541735,
+      "endTime": 2107.612382,
+      "stats": {
+        "connectionTime": {
+          "avg": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "latency": {
+          "avg": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "throughput": {
+          "messagesPerSecond": 1920467.7829334438,
+          "totalMessages": 100000,
+          "duration": 0.05207064700000001
+        },
+        "memory": {
+          "before": 7.314933776855469,
+          "after": 8.289161682128906,
+          "used": 0.9742279052734375
+        }
+      }
+    },
+    "deno": {
+      "implementation": "Native WebSocket (ws)",
+      "runtime": "deno",
+      "serverUrl": "ws://localhost:8090",
+      "config": {
+        "connections": 100,
+        "messagesPerConnection": 1000,
+        "messageSize": 100
+      },
+      "connectionTime": [],
+      "latencies": [],
+      "errors": 111,
+      "memoryBefore": 6.55352783203125,
+      "memoryAfter": 7.2057342529296875,
+      "startTime": 2032.160564,
+      "endTime": 2089.592493,
+      "stats": {
+        "connectionTime": {
+          "avg": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "latency": {
+          "avg": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "throughput": {
+          "messagesPerSecond": 1741191.7332604283,
+          "totalMessages": 100000,
+          "duration": 0.05743192900000008
+        },
+        "memory": {
+          "before": 6.55352783203125,
+          "after": 7.2057342529296875,
+          "used": 0.6522064208984375
+        }
+      }
+    },
+    "bun": {
+      "implementation": "Native WebSocket (ws)",
+      "runtime": "bun",
+      "serverUrl": "ws://localhost:8090",
+      "config": {
+        "connections": 100,
+        "messagesPerConnection": 1000,
+        "messageSize": 100
+      },
+      "connectionTime": [],
+      "latencies": [],
+      "errors": 111,
+      "memoryBefore": 0.33827877044677734,
+      "memoryAfter": 0.33827877044677734,
+      "startTime": 2048.433906,
+      "endTime": 2117.695221,
+      "stats": {
+        "connectionTime": {
+          "avg": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "latency": {
+          "avg": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "throughput": {
+          "messagesPerSecond": 1443807.4125505756,
+          "totalMessages": 100000,
+          "duration": 0.06926131499999974
+        },
+        "memory": {
+          "before": 0.33827877044677734,
+          "after": 0.33827877044677734,
+          "used": 0
+        }
+      }
+    }
+  },
+  "summary": {
+    "node": {
+      "connectionTime": 0,
+      "latency": 0,
+      "throughput": 1920467.7829334438,
+      "memory": 0.9742279052734375,
+      "errors": 111
+    },
+    "deno": {
+      "connectionTime": 0,
+      "latency": 0,
+      "throughput": 1741191.7332604283,
+      "memory": 0.6522064208984375,
+      "errors": 111
+    },
+    "bun": {
+      "connectionTime": 0,
+      "latency": 0,
+      "throughput": 1443807.4125505756,
+      "memory": 0,
+      "errors": 111
+    }
+  }
+}

@@ -1,24 +1,41 @@
-#root {
-  max-width: 600px;
+.app {
+  max-width: 800px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 1rem;
 }
 
 h1 {
   text-align: center;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
 }
 
-.subtitle {
+.error-message {
+  background: #3d1a1a;
+  color: #f87171;
+  padding: 0.75rem;
+  border-radius: 4px;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.loading {
   text-align: center;
   color: #888;
-  margin-bottom: 2rem;
+  padding: 2rem;
 }
 
-.todo-list-container {
+/* Join Screen */
+.join-screen {
+  max-width: 300px;
+  margin: 2rem auto;
+  padding: 1.5rem;
   background: #1a1a1a;
   border-radius: 8px;
-  padding: 1.5rem;
+}
+
+.join-screen h2 {
+  text-align: center;
+  margin-bottom: 1rem;
 }
 
 .connection-status {
@@ -39,14 +56,13 @@ h1 {
   color: #f87171;
 }
 
-.todo-form {
+.join-screen form {
   display: flex;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
+  flex-direction: column;
+  gap: 0.75rem;
 }
 
-.todo-input {
-  flex: 1;
+.join-screen input {
   padding: 0.75rem;
   border: 1px solid #333;
   border-radius: 4px;
@@ -55,62 +71,112 @@ h1 {
   font-size: 1rem;
 }
 
-.todo-input:focus {
+.join-screen input:focus {
   outline: none;
   border-color: #646cff;
 }
 
-.todo-form button {
-  padding: 0.75rem 1.5rem;
+/* Game World */
+.game-world {
+  background: #1a1a1a;
+  border-radius: 8px;
+  padding: 1rem;
 }
 
-.todo-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.todo-item {
+.game-header {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 0.75rem;
-  padding: 0.75rem;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.75rem;
   border-bottom: 1px solid #333;
 }
 
-.todo-item:last-child {
-  border-bottom: none;
+.player-info {
+  font-weight: 600;
 }
 
-.todo-item input[type="checkbox"] {
-  width: 1.25rem;
-  height: 1.25rem;
-  cursor: pointer;
+.level-info {
+  color: #888;
 }
 
-.todo-item span {
-  flex: 1;
-}
-
-.todo-item span.completed {
-  text-decoration: line-through;
-  color: #666;
-}
-
-.remove-btn {
-  padding: 0.25rem 0.75rem;
+.leave-btn {
+  padding: 0.5rem 1rem;
   font-size: 0.875rem;
   background: #dc2626;
   border-color: #dc2626;
 }
 
-.remove-btn:hover {
+.leave-btn:hover {
   background: #b91c1c;
   border-color: #b91c1c;
 }
 
-.empty-message {
-  text-align: center;
-  color: #666;
-  padding: 1rem;
+.game-controls {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+  font-size: 0.875rem;
+  color: #888;
+}
+
+.game-grid {
+  position: relative;
+  background: #0a0a0a;
+  border: 1px solid #333;
+  border-radius: 4px;
+  margin: 0 auto;
+  background-image:
+    linear-gradient(to right, #222 1px, transparent 1px),
+    linear-gradient(to bottom, #222 1px, transparent 1px);
+  overflow: hidden;
+}
+
+.game-object {
+  position: absolute;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: bold;
+  color: #000;
+  transition: transform 0.1s ease-out;
+  box-sizing: border-box;
+}
+
+.game-object.current-player {
+  border: 2px solid #fff;
+  z-index: 10;
+}
+
+.game-object.nearby {
+  box-shadow: 0 0 4px rgba(255, 255, 255, 0.5);
+}
+
+.player-label {
+  font-size: 8px;
+  text-transform: uppercase;
+}
+
+.game-legend {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid #333;
+  font-size: 0.875rem;
+  flex-wrap: wrap;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.legend-color {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
 }
